@@ -1,0 +1,50 @@
+﻿@model CadastroDeAgencias.Models.Agencia
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Endereco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorarioAberto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorarioAberto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HorarioFechado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HorarioFechado)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "AgenciaEdit", new { id = Model.AgenciaId }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

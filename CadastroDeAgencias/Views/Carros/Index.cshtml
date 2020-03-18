@@ -1,0 +1,109 @@
+﻿@model PagedList.IPagedList<CadastroDeAgencias.Models.Agencia>
+
+@using PagedList.Mvc
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{ViewBag.Title = "Index";}
+
+<p><h2>Cadastro de Agencias e carros</h2></p>
+
+<p>
+    @Html.ActionLink("Incluir Novo Carro", "Create", "Carros", new { @class = "btn btn-success" })
+    @Html.ActionLink("Incluir Nova Agencia", "AgenciaCreate", "Carros", new { @class = "btn btn-success" })
+</p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Porcurar por agencia: @Html.TextBox("searchString")
+        <input type="submit" value="Buscar" />
+    </p>
+}
+
+<div>
+    <table border="0">
+        <tr bgcolor="#FDF5E6">
+            <th width="30"></th>
+            <th bgcolor="#FDF5E6">
+                @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.agencia })
+            </th>
+
+            <th bgcolor="#FDF5E6">
+                <b>Carros</b>
+            </th>
+        </tr>
+
+
+        @{ var ll = ViewBag.d; }
+
+        @foreach (var item in Model)
+        {
+                        
+            <tr>
+                <th bgcolor="#FDF5E6">
+
+                    @{ @Html.Raw(ll) }
+
+                    @{ ll++; }
+                </th>
+
+                <td style="line-height:26px;" width="200" height="40" bgcolor="#FDF5E6">
+
+                    <b>@item.Nome</b>
+                    
+                    <br />
+                    @item.Endereco
+
+                    <br />
+                    @item.HorarioAberto
+                    <br />
+
+                    @item.HorarioFechado
+                    <br />
+                    @Html.ActionLink("Editar", "AgenciaEdit", new { id = item.AgenciaId }) |
+                    @Html.ActionLink("Detalhes", "AgenciaDetails", new { id = item.AgenciaId }) |
+                    @Html.ActionLink("Deletar", "AgenciaDelete", new { id = item.AgenciaId })
+
+                </td>
+
+                <td style="line-height:28px" bgcolor="#FDF5E6">
+
+                    <table class="table table-striped " width="500">
+                        <tr>
+                            <th>Modelo</th>
+                            <th>Fabricante</th>
+                            <th>Placa</th>
+                            <th>Cor</th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var te in item.Carros)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => te.Modelo)</td>
+
+                                <td>@Html.DisplayFor(modelItem => te.Fabricante)</td>
+
+                                <td>@Html.DisplayFor(modelItem => te.Placa)</td>
+
+                                <td>@Html.DisplayFor(modelItem => te.Cor)</td>
+
+                                <td>
+                                    @Html.ActionLink("Editar", "Edit", new { id = te.CarroId }) |
+                                    @Html.ActionLink("Detalhes", "Details", new { id = te.CarroId }) |
+                                    @Html.ActionLink("Deletar", "Delete", new { id = te.CarroId })
+                                </td>
+                            </tr>
+                        }
+                    </table>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<a href="#top" class="glyphicon glyphicon-chevron-up"></a> Página @Model.PageNumber de @Model.PageCount
+
+@{ViewBag.d = ll;}
+@Html.PagedListPager(Model, Page => Url.Action("Index", new { Pagina = Page, du = ViewBag.d }), PagedListRenderOptions.ClassicPlusFirstAndLast)

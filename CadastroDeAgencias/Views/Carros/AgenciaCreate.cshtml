@@ -1,0 +1,68 @@
+﻿@model CadastroDeAgencias.Models.Agencia
+
+@{ 
+    ViewBag.Title = "AgenciaCreate";
+}
+
+
+<h1>Nova Agencia</h1>
+
+<hr />
+
+@using (Html.BeginForm("AgenciaCreate", "Carros", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Nome,
+                                   new { @class = "form-control", @placeholder = "Nome da Agencia" })
+                @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Endereco, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Endereco,
+                                   new { @class = "form-control", @placeholder = "Endereço da agencia" })
+                @Html.ValidationMessageFor(m => m.Endereco, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.HorarioAberto, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.HorarioAberto,
+                                   new { @class = "form-control", @placeholder = "Horario aberto" })
+                @Html.ValidationMessageFor(m => m.HorarioAberto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.HorarioFechado, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.HorarioFechado,
+                                   new { @class = "form-control", @placeholder = "Horario fechado" })
+                @Html.ValidationMessageFor(m => m.HorarioFechado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+                          
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar Agencia" class="btn btn-success" />
+                @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
+<div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
